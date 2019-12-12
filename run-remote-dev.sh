@@ -14,5 +14,3 @@ docker run --rm -ti \
   -v /home/sebastian/.m2/:/root/.m2/ \
   -w /workspace \
   tmp-builder
-
-#  -v $(pwd)/:/workspace/ \
