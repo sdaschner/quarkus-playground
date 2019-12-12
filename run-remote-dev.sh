@@ -14,3 +14,7 @@ docker run --rm -ti \
   -v /home/sebastian/.m2/:/root/.m2/ \
   -w /workspace \
   tmp-builder
+
+sleep 5
+
+mvn compile quarkus:remote-dev -Dquarkus.live-reload.url=http://localhost:8080 -Dquarkus.live-reload.password=123
