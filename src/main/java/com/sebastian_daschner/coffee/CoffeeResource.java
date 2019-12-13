@@ -1,4 +1,4 @@
-package com.sebastian_daschner.zero_downtime_k8s;
+package com.sebastian_daschner.coffee;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;

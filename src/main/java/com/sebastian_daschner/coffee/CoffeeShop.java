@@ -1,4 +1,4 @@
-package com.sebastian_daschner.zero_downtime_k8s;
+package com.sebastian_daschner.coffee;
 
 import org.eclipse.microprofile.faulttolerance.Asynchronous;
 import org.eclipse.microprofile.faulttolerance.Bulkhead;
@@ -18,9 +18,6 @@ public class CoffeeShop {
     @Inject
     @Metric(name = "coffees_total")
     Counter totalCoffees;
-
-    @Inject
-    CoffeeRepository coffeeRepository;
 
     public String getCoffee() {
         totalCoffees.inc();
@@ -42,12 +39,13 @@ public class CoffeeShop {
 
     @Transactional
     public List<Coffee> getCoffees() {
-        return coffeeRepository.findAll().list();
+        return Coffee.listAll();
     }
 
     @Transactional
     public void addCoffee(String type) {
-        coffeeRepository.persist(new Coffee(type));
+        Coffee coffee = new Coffee(type);
+        coffee.persist();
     }
 
 }

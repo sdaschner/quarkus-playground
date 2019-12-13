@@ -1,9 +1,7 @@
-package com.sebastian_daschner.zero_downtime_k8s;
+package com.sebastian_daschner.coffee;
 
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
-
-import java.util.UUID;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
