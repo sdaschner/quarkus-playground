@@ -1,18 +1,10 @@
 package com.sebastian_daschner.coffee;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import java.util.UUID;
 
-import javax.persistence.*;
+public class Coffee {
 
-@Entity
-@Table(name = "coffees")
-public class Coffee extends PanacheEntityBase {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "coffee_seq")
-    @SequenceGenerator(name = "coffee_seq", allocationSize = 1)
-    public long id;
-
+    public UUID id = UUID.randomUUID();
     public String type;
 
     Coffee() {
