@@ -1,6 +1,7 @@
 package com.sebastian_daschner.coffee;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 @ApplicationScoped
+@Named
 public class CoffeeShop {
 
     private Map<UUID, Coffee> store = new ConcurrentHashMap<>();
