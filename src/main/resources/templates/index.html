@@ -8,12 +8,12 @@
     <title>Entries</title>
 </head>
 <body>
-    We have {entries.size} entries:<br>
+    We have {entries.size} entries:
 
     <ul>
-        {#for entry in entries}
-        <li>{count}. <a href="/entries/{entry.link}">{entry.title}</a> {#if hasNext} OR{/}</li>
-        {/}
+    {#for entry in entries}
+        <li>{count}. <a href="/entries/{entry.link}">{entry.title}</a> {#if hasNext}OR{/}</li>
+    {/}
     </ul>
 </body>
 </html>

@@ -6,10 +6,7 @@ import io.quarkus.qute.api.ResourcePath;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -36,7 +33,12 @@ public class EntriesResource {
     @GET
     @Path("{entry}")
     public TemplateInstance entry(@PathParam("entry") String entryName) {
-        return entryTemplate.data("entry", entryStore.getEntry(entryName));
+        Entry entry = entryStore.getEntry(entryName);
+
+        if (entry == null)
+            throw new NotFoundException();
+
+        return entryTemplate.data("entry", entry);
     }
 
 }

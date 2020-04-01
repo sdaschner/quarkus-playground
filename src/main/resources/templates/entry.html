@@ -13,13 +13,14 @@
     <p>{entry.abstractContent.raw}</p>
 
 {invalid ?: 'hello'} {invalid or 'world'} {invalid.hello.hello or '!'} <br>
-{inject:coffeeShop.getCoffee} <br>
 
 {#include includes/teaser}
-    {#title}My title{/}
-    {#content}My content{/}
+    {#title}{entry.title}{/}
+    {#content}{entry.abstractContent}{/}
 {/}
 
-{#youtube id='Pzz9G3dFKWY' /}
+{#youtube id='Pzz9G3dFKWY'/}
+
+{inject:coffeeShop.getCoffee}
 </body>
 </html>
