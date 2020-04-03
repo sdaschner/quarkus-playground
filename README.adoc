@@ -1,0 +1,23 @@
+= Qute Templating example
+
+These are the examples for the following tutorial video:
+
+- https://blog.sebastian-daschner.com/entries/qute-templates-quarkus
+//- https://blog.sebastian-daschner.com/entries/qute-advanced-features
+
+== To try
+
+You can run the examples with:
+
+----
+mvn package
+java -jar target/quarkus-playground-runner.jar 
+----
+
+Or you run the development mode with:
+
+----
+mvn quarkus:dev
+----
+
+Then navigate your browser to http://localhost:8080/entries/
