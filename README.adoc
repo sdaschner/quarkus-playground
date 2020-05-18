@@ -17,7 +17,7 @@ In another terminal, run the following to create the sample data:
 
 [source,bash]
 ----
-cat test-data.cypher | cypher-shell -u neo4j -p test --format verbose
+cypher-shell -u neo4j -p test --file src/test/resources/test-data.cypher --format verbose
 ----
 
 Then build and run the application:
