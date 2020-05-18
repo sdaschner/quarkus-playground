@@ -4,16 +4,16 @@ How to use Neo4J OGM with Quarkus.
 
 == To try
 
-Requires `cypher-shell` (or alternatively run the Cypher-Queries in your IDE or the http://localhost:7474/browser/[Neo4J Browser^]).
+Requires Docker, Maven, JDK 14, and `cypher-shell` (or alternatively run the Cypher-Queries in your IDE or the http://localhost:7474/browser/[Neo4J Browser^]).
 
-You can run the examples with:
+You can start a fresh Neo4J instance with:
 
 [source,bash]
 ----
 ./run-graph-db.sh
 ----
 
-In another terminal, run:
+In another terminal, run the following to create the sample data:
 
 [source,bash]
 ----
