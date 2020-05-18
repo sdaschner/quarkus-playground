@@ -1,14 +1,28 @@
-= Qute Templating example
+= Quarkus with Neo4j
 
-These are the examples for the following tutorial video:
-
-- https://blog.sebastian-daschner.com/entries/qute-templates-quarkus
-//- https://blog.sebastian-daschner.com/entries/qute-advanced-features
+How to use Neo4J OGM with Quarkus.
 
 == To try
 
+Requires `cypher-shell` (or alternatively run the Cypher-Queries in your IDE or the http://localhost:7474/browser/[Neo4J Browser^]).
+
 You can run the examples with:
 
+[source,bash]
+----
+./run-graph-db.sh
+----
+
+In another terminal, run:
+
+[source,bash]
+----
+cat test-data.cypher | cypher-shell -u neo4j -p test --format verbose
+----
+
+Then build and run the application:
+
+[source,bash]
 ----
 mvn package
 java -jar target/quarkus-playground-runner.jar 
@@ -16,8 +30,16 @@ java -jar target/quarkus-playground-runner.jar
 
 Or you run the development mode with:
 
+[source,bash]
 ----
 mvn quarkus:dev
 ----
 
-Then navigate your browser to http://localhost:8080/entries/
+Then query the coffee beans with (with or without `jq`):
+
+[source,bash]
+----
+curl localhost:8080/beans/ | jq .
+curl "localhost:8080/beans?flavor=fruit" | jq .
+curl localhost:8080/beans/special | jq .
+----
