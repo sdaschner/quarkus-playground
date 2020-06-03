@@ -1,0 +1,46 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: coffee-shop
+  labels:
+    app: coffee-shop
+spec:
+  selector:
+    app: coffee-shop
+  ports:
+  - port: 8080
+    name: http
+---
+
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: coffee-shop
+spec:
+  selector:
+    matchLabels:
+      app: coffee-shop
+      version: v1
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: coffee-shop
+        version: v1
+    spec:
+      containers:
+      - name: coffee-shop
+        image: sdaschner/coffee-shop:quarkus-graphdb
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        env:
+        - name: QUARKUS_NEO4J_URI
+          value: "bolt://graphdb-neo4j:7687"
+        - name: QUARKUS_NEO4J_AUTHENTICATION_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: graphdb-neo4j-secrets
+              key: neo4j-password
+      restartPolicy: Always
+---
