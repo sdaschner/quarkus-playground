@@ -1,6 +1,3 @@
-MATCH (n)
-DETACH DELETE n;
-
 // flavors
 UNWIND [
   {flavor: 'NUTTY'},

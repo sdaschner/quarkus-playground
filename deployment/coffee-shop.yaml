@@ -42,5 +42,16 @@ spec:
             secretKeyRef:
               name: graphdb-neo4j-secrets
               key: neo4j-password
+      initContainers:
+      - name: schema-migration
+        image: sdaschner/neo4j-coffee-shop-migration:v002
+        env:
+        - name: NEO4J_ADDRESS
+          value: "bolt://graphdb-neo4j:7687"
+        - name: NEO4J_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: graphdb-neo4j-secrets
+              key: neo4j-password
       restartPolicy: Always
 ---
