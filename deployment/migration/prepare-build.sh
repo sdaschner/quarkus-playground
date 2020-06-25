@@ -9,4 +9,4 @@ if [[ ! -d neo4j-migrations-0.0.12 ]]; then
   unzip neo4j-migrations-cli-0.0.12.zip
 fi
 
-docker build -t sdaschner/neo4j-coffee-shop-migration:v002 .
+docker build -t sdaschner/neo4j-coffee-shop-migration:v003 .

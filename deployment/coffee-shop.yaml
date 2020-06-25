@@ -44,7 +44,7 @@ spec:
               key: neo4j-password
       initContainers:
       - name: schema-migration
-        image: sdaschner/neo4j-coffee-shop-migration:v002
+        image: sdaschner/neo4j-coffee-shop-migration:v003
         env:
         - name: NEO4J_ADDRESS
           value: "bolt://graphdb-neo4j:7687"
