@@ -13,18 +13,18 @@ import java.util.Objects;
 public class Flavor {
 
     @Id
-    public String description;
+    public String name;
 
     private Flavor() {
     }
 
-    public Flavor(String description) {
-        this.description = description;
+    public Flavor(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
-        return description;
+        return name;
     }
 
     @Override
@@ -32,12 +32,12 @@ public class Flavor {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Flavor flavor = (Flavor) o;
-        return Objects.equals(description, flavor.description);
+        return Objects.equals(name, flavor.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(description);
+        return Objects.hash(name);
     }
 
 }

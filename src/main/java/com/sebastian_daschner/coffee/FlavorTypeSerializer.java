@@ -10,7 +10,7 @@ public class FlavorTypeSerializer implements JsonbSerializer<Flavor> {
 
     @Override
     public void serialize(Flavor flavor, JsonGenerator generator, SerializationContext ctx) {
-        generator.write(flavor.description);
+        generator.write(flavor.name);
     }
 
 }

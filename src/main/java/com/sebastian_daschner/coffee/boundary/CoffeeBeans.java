@@ -25,7 +25,7 @@ public class CoffeeBeans {
     public List<CoffeeBean> getCoffeeBeansSpecificFlavor(String flavor) {
         Session session = sessionFactory.openSession();
 
-        Iterable<CoffeeBean> result = session.query(CoffeeBean.class, "MATCH (b:CoffeeBean)-[:TASTES]->(:Flavor {description: $flavor})\n" +
+        Iterable<CoffeeBean> result = session.query(CoffeeBean.class, "MATCH (b:CoffeeBean)-[:TASTES]->(:Flavor {name: $flavor})\n" +
                         "MATCH (b)-[isFrom:IS_FROM]->(country)\n" +
                         "MATCH (b)-[tastes:TASTES]->(flavor)\n" +
                         "RETURN b, collect(isFrom), collect(country), collect(tastes), collect(flavor)\n" +

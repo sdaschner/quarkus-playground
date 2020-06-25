@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
       - name: coffee-shop
-        image: sdaschner/coffee-shop:quarkus-graphdb
+        image: sdaschner/coffee-shop:quarkus-graphdb-2
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
