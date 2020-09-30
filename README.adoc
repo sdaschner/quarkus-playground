@@ -2,6 +2,7 @@
 
 How to use Neo4J OGM with Quarkus.
 
+
 == To try
 
 Requires Docker, Maven, JDK 14, and `cypher-shell` (or alternatively run the Cypher-Queries in your IDE or the http://localhost:7474/browser/[Neo4J Browser^]).
@@ -17,7 +18,9 @@ In another terminal, run the following to create the sample data:
 
 [source,bash]
 ----
-cypher-shell -u neo4j -p test --file src/test/resources/test-data.cypher --format verbose
+cypher-shell -u neo4j -p test --file deployment/migration/cyphers/V001__SchemaMasterData.cypher
+cypher-shell -u neo4j -p test --file deployment/migration/cyphers/V002__AddFlavorName.cypher
+cypher-shell -u neo4j -p test --file deployment/migration/cyphers/V003__RemoveFlavorDescription.cypher
 ----
 
 Then build and run the application:
@@ -43,3 +46,11 @@ curl localhost:8080/beans/ | jq .
 curl "localhost:8080/beans?flavor=fruit" | jq .
 curl localhost:8080/beans/special | jq .
 ----
+
+
+== Run in Kubernetes
+
+In order to run the example and Neo4J in Kubernetes, check out the following videos:
+
+- https://blog.sebastian-daschner.com/entries/neo4j-deployment-managed-k8s[Deploying a Neo4J cluster on managed Kubernetes^]
+- https://blog.sebastian-daschner.com/entries/neo4j-single-core-managed-k8s[Deploying a Neo4J single core on managed Kubernetes^]
