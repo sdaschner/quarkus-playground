@@ -1,6 +1,6 @@
-package com.sebastian_daschner.coffee.boundary;
+package com.sebastian_daschner.coffee.beans.boundary;
 
-import com.sebastian_daschner.coffee.entity.*;
+import com.sebastian_daschner.coffee.beans.entity.*;
 import org.neo4j.ogm.cypher.query.SortOrder;
 import org.neo4j.ogm.session.Session;
 import org.neo4j.ogm.session.SessionFactory;
@@ -8,16 +8,18 @@ import org.neo4j.ogm.transaction.Transaction;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @ApplicationScoped
 public class CoffeeBeans {
 
     @Inject
     SessionFactory sessionFactory;
+
+    public CoffeeBean getCoffeeBean(String name) {
+        Session session = sessionFactory.openSession();
+        return session.load(CoffeeBean.class, name);
+    }
 
     public List<CoffeeBean> getCoffeeBeans() {
         Session session = sessionFactory.openSession();
@@ -77,6 +79,27 @@ public class CoffeeBeans {
         }, session);
     }
 
+    public UUID updateBeanFlavors(String name, Map<String, Double> flavors) {
+        Session session = sessionFactory.openSession();
+
+        return runInTransaction(() -> {
+            CoffeeBean bean = session.load(CoffeeBean.class, name);
+            if (bean == null)
+                throw new IllegalArgumentException("Could not find bean with name " + name);
+
+            bean.flavorProfiles.clear();
+            addFlavorProfiles(flavors, session, bean);
+            verifyFlavorPercentages(bean);
+
+            session.save(bean);
+        }, session);
+    }
+
+    public UUID deleteBean(String name) {
+        Session session = sessionFactory.openSession();
+        return runInTransaction(() -> session.delete(session.load(CoffeeBean.class, name)), session);
+    }
+
     private void addOrigins(Set<String> origins, Session session, CoffeeBean bean) {
         origins.forEach(o -> {
             Origin origin = session.load(Origin.class, o);
@@ -109,16 +132,19 @@ public class CoffeeBeans {
         double sum = bean.flavorProfiles.stream()
                 .mapToDouble(f -> f.percentage)
                 .sum();
-        if (Math.abs(1 - sum ) >= 0.001)
+        if (Math.abs(1 - sum) >= 0.001)
             throw new IllegalArgumentException("Flavor percentages don't add up to 100% (1.0)");
     }
 
-    private void runInTransaction(Runnable runnable, Session session) {
+    private UUID runInTransaction(Runnable runnable, Session session) {
         Transaction transaction = session.beginTransaction();
         try {
+            UUID actionId = UUID.randomUUID();
             runnable.run();
+            session.query("CREATE (:Action {actionId: $actionId, timestamp: TIMESTAMP()})", Map.of("actionId", actionId));
             transaction.commit();
             transaction.close();
+            return actionId;
         } catch (RuntimeException e) {
             System.err.println("Could not execute transaction: " + e);
             transaction.rollback();

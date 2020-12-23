@@ -1,7 +1,7 @@
-package com.sebastian_daschner.coffee.boundary;
+package com.sebastian_daschner.coffee.beans.boundary;
 
-import com.sebastian_daschner.coffee.entity.CoffeeBean;
-import com.sebastian_daschner.coffee.entity.Roast;
+import com.sebastian_daschner.coffee.beans.entity.CoffeeBean;
+import com.sebastian_daschner.coffee.beans.entity.Roast;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import static java.util.stream.Collectors.toMap;
 import static java.util.stream.Collectors.toSet;
@@ -49,6 +50,35 @@ public class CoffeeBeansResource {
                 .collect(toMap(j -> j.getString("flavor"), j -> j.getJsonNumber("percentage").doubleValue()));
 
         coffeeBeans.createBean(name, roast, origins, flavors);
+    }
+
+    @GET
+    @Path("{name}")
+    public CoffeeBean bean(@PathParam("name") String name) {
+        CoffeeBean bean = coffeeBeans.getCoffeeBean(name);
+        if (bean == null)
+            throw new NotFoundException();
+        return bean;
+    }
+
+    @PATCH
+    @Path("{name}")
+    public Response updateBean(@PathParam("name") String name, JsonObject json) {
+
+        Map<String, Double> flavors = json.getJsonArray("flavorProfiles")
+                .getValuesAs(JsonObject.class).stream()
+                .collect(toMap(j -> j.getString("flavor"), j -> j.getJsonNumber("percentage").doubleValue()));
+
+        UUID actionId = coffeeBeans.updateBeanFlavors(name, flavors);
+
+        return Response.noContent().header("Action-Id", actionId).build();
+    }
+
+    @DELETE
+    @Path("{name}")
+    public Response deleteBean(@PathParam("name") String name) {
+        UUID actionId = coffeeBeans.deleteBean(name);
+        return Response.noContent().header("Action-Id", actionId).build();
     }
 
     @GET

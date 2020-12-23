@@ -14,6 +14,9 @@ You can start a fresh Neo4J instance with:
 ./run-graph-db.sh
 ----
 
+If you want to try out the _undo_ feature, as shown https://blog.sebastian-daschner.com/entries/undo-with-neo4j[here^], you need to start Neo4J https://github.com/sdaschner/neo4j-persistent-action-listener/blob/4.0/build-run-test-db.sh[in this way^].
+
+
 In another terminal, run the following to create the sample data:
 
 [source,bash]
@@ -21,6 +24,7 @@ In another terminal, run the following to create the sample data:
 cypher-shell -u neo4j -p test --file deployment/migration/cyphers/V001__SchemaMasterData.cypher
 cypher-shell -u neo4j -p test --file deployment/migration/cyphers/V002__AddFlavorName.cypher
 cypher-shell -u neo4j -p test --file deployment/migration/cyphers/V003__RemoveFlavorDescription.cypher
+cypher-shell -u neo4j -p test --file deployment/migration/cyphers/V004__Schema.cypher
 ----
 
 Then build and run the application:

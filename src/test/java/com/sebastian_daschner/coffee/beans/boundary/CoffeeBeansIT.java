@@ -1,6 +1,6 @@
-package com.sebastian_daschner.coffee.boundary;
+package com.sebastian_daschner.coffee.beans.boundary;
 
-import com.sebastian_daschner.coffee.entity.*;
+import com.sebastian_daschner.coffee.beans.entity.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

@@ -1,6 +1,6 @@
-package com.sebastian_daschner.coffee.entity;
+package com.sebastian_daschner.coffee.beans.entity;
 
-import com.sebastian_daschner.coffee.FlavorTypeSerializer;
+import com.sebastian_daschner.coffee.beans.FlavorTypeSerializer;
 import org.neo4j.ogm.annotation.Id;
 
 import javax.json.bind.annotation.JsonbTypeSerializer;

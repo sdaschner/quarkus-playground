@@ -1,4 +1,4 @@
-package com.sebastian_daschner.coffee.entity;
+package com.sebastian_daschner.coffee.beans.entity;
 
 public enum CoffeeType {
 

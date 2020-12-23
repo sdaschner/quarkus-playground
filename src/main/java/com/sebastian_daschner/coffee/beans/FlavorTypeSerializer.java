@@ -1,6 +1,6 @@
-package com.sebastian_daschner.coffee;
+package com.sebastian_daschner.coffee.beans;
 
-import com.sebastian_daschner.coffee.entity.Flavor;
+import com.sebastian_daschner.coffee.beans.entity.Flavor;
 
 import javax.json.bind.serializer.JsonbSerializer;
 import javax.json.bind.serializer.SerializationContext;

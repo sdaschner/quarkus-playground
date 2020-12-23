@@ -1,6 +1,6 @@
-package com.sebastian_daschner.coffee.boundary;
+package com.sebastian_daschner.coffee.beans.boundary;
 
-import com.sebastian_daschner.coffee.control.SessionFactoryProducer;
+import com.sebastian_daschner.coffee.graph.control.SessionFactoryProducer;
 import org.neo4j.ogm.config.Configuration;
 import org.neo4j.ogm.session.SessionFactory;
 
@@ -17,7 +17,7 @@ public class CoffeeBeansTD extends CoffeeBeans {
                 .useNativeTypes()
                 .build();
 
-        sessionFactory = new SessionFactory(neoConfig, SessionFactoryProducer.PACKAGE);
+        sessionFactory = new SessionFactory(neoConfig, SessionFactoryProducer.PACKAGES);
     }
 
 }
