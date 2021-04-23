@@ -13,7 +13,7 @@ public class CoffeeSystem {
     private final WebTarget baseTarget;
 
     public CoffeeSystem() {
-        client = ClientBuilder.newClient();
+        client = ClientBuilder.newBuilder().build();
         baseTarget = client.target(buildUri());
     }
 
