@@ -33,4 +33,9 @@ public class CoffeeSystem {
         if (response.getStatusInfo().getFamily() != Response.Status.Family.SUCCESSFUL)
             throw new AssertionError("Status was not successful: " + response.getStatus());
     }
+
+    public void close() {
+        client.close();
+    }
+
 }

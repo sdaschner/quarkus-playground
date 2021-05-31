@@ -13,7 +13,7 @@ public class CoffeeShop {
     private Map<UUID, Coffee> store = new ConcurrentHashMap<>();
 
     public String getCoffee() {
-        return "Coffee";
+        return "Coffee.";
     }
 
     public Coffee getCoffee(UUID id) {
