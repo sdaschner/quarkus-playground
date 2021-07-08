@@ -1,0 +1,14 @@
+coffee_mug: ☕
+
+complex:
+  coffee: coffee
+  list:
+  - 123
+  - 234
+  - 456
+  some-other:
+    coffee: abc123
+    list:
+    - abc123
+    - abc234
+    - abc345

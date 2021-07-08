@@ -12,9 +12,18 @@ public class CoffeeResource {
     @Inject
     CoffeeShop coffeeShop;
 
+    @Inject
+    CoffeeShopConfig config;
+
     @GET
     public String getCoffeeShop() {
         return coffeeShop.getCoffee();
+    }
+
+    @Path("config")
+    @GET
+    public String config() {
+        return config.getConfig();
     }
 
 }
