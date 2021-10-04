@@ -3,13 +3,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CoffeeIT {
+public class CoffeeTest {
 
     private final CoffeeSystem coffeeSystem = new CoffeeSystem();
 
     @Test
     void testHello() {
-        assertThat(coffeeSystem.getCoffee()).isEqualTo("Coffee.");
+        assertThat(coffeeSystem.getCoffee()).isEqualTo("Coffee");
     }
 
     @AfterEach

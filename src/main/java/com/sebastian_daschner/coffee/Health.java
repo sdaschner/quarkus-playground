@@ -15,5 +15,4 @@ public class Health implements HealthCheck {
         return HealthCheckResponse.up("coffee-shop");
     }
 
-
 }
