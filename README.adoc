@@ -1,0 +1,45 @@
+= Development Workflow Example with Quarkus
+
+To run the examples, you need JDK 16+ and a recent Maven 3 installation.
+
+== Building &amp; Running
+
+In order to build and run the project, execute:
+
+----
+mvn package
+java -jar target/quarkus-app/quarkus-run.jar
+----
+
+Then you can access the Coffee endpoint, for example via the command line:
+
+----
+curl localhost:8080/coffee
+----
+
+
+== Live-Coding
+
+To run the Quarkus live-coding `dev` mode, execute the following:
+
+----
+mvn quarkus:dev
+----
+
+This starts up the application in a mode, that allows us to make changes, and minimized the waiting times.
+
+After successful deployment, you can access the application just as before:
+
+----
+curl localhost:8080/coffee
+----
+
+Try changing some code, for example the output of the `getCoffee()` method in the `CoffeeShop` class.
+
+
+== Executing tests
+
+In order to execute tests immediately, without waiting time, press `R` and `O` while in the `dev` mode (`mvn quarkus:dev`), in order to activate live tests and test output.
+You will see the test results in the bottom output, and you can re-execute the tests with `R`.
+
+These tests will already access the running application via its HTTP interface.
