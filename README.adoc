@@ -39,6 +39,24 @@ Try changing some code, for example the output of the `getCoffee()` method in th
 
 == Executing tests
 
+=== IDE
+
+You can simply run the JUnit tests in your IDE of your choice.
+Both the `CoffeeIT` and the `CoffeeTest` that is located in the system-test require that the application is running.
+
+
+=== Command Line
+
+You can execute the tests on the command line via Maven by executing the following commands that run the Maven "`unit tests`" or "`integration tests`", respectively:
+
+----
+mvn verify
+mvn test-compile failsafe:integration-test failsafe:verify
+----
+
+
+=== Live-Testing
+
 In order to execute tests immediately, without waiting time, press `R` and `O` while in the `dev` mode (`mvn quarkus:dev`), in order to activate live tests and test output.
 You will see the test results in the bottom output, and you can re-execute the tests with `R`.
 
