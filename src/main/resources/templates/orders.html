@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Orders</title>
+</head>
+<body>
+
+    <h1>Coffee orders</h1>
+
+    <ul>
+    {#for order in orders}
+        <li>{order_count}. {order.type}{#if order_hasNext},{/if}</li>
+    {/for}
+    </ul>
+
+    <form action="orders.html" method="post">
+        <input type="text" name="type">
+        <input type="submit" value="Create">
+    </form>
+</body>
+</html>
