@@ -4,9 +4,12 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonObject;
-import javax.json.bind.Jsonb;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,25 +21,8 @@ public class CoffeesResource {
     @Inject
     CoffeeShop coffeeShop;
 
-    @Inject
-    Jsonb jsonb;
-
-    @GET
-    @Path("test-jsonb")
-    public String testJsonB() {
-        return jsonb.toJson(new Coffee("Espresso"));
-    }
-
-    @GET
-    @Path("test-jsonp")
-    public String testJsonP() {
-        Coffee coffee = new Coffee("Espresso");
-        return Json.createObjectBuilder()
-                .add("type", coffee.type)
-                .add("id", coffee.id.toString())
-                .build()
-                .toString();
-    }
+    @Context
+    UriInfo uriInfo;
 
     @GET
     public List<Coffee> getCoffees() {
@@ -52,13 +38,20 @@ public class CoffeesResource {
     }
 
     @POST
-    public void addCoffee(JsonObject object) {
+    public Response createCoffee(JsonObject object) {
         String type = object.getString("type", null);
 
         if (type == null)
             throw new BadRequestException();
 
-        coffeeShop.addCoffee(type);
+        UUID uuid = coffeeShop.addCoffee(type);
+
+        URI uri = uriInfo.getBaseUriBuilder()
+                .path(CoffeesResource.class)
+                .path(CoffeesResource.class, "getCoffee")
+                .build(uuid);
+
+        return Response.created(uri).build();
     }
 
 }

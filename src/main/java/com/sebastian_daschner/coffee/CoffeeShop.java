@@ -24,9 +24,10 @@ public class CoffeeShop {
         return new ArrayList<>(store.values());
     }
 
-    public void addCoffee(String type) {
+    public UUID addCoffee(String type) {
         Coffee coffee = new Coffee(type);
         store.put(coffee.id, coffee);
+        return coffee.id;
     }
 
 }
