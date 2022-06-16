@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Files</title>
+</head>
+<body>
+<main>
+    <h1>File Upload</h1>
+    <form action="files.html" method="post" enctype="multipart/form-data">
+        <input type="text" name="text" placeholder="Some text">
+        <div>
+            <input type="file" name="file">
+        </div>
+        <button onclick="addFile(); return false;">Add file</button>
+        <button type="submit">Submit</button>
+    </form>
+</main>
+<script>
+    function addFile() {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.name = 'file';
+        document.querySelector('form div').appendChild(input);
+    }
+</script>
+<style>
+    main {
+        margin: 0 auto;
+        width: max-content;
+    }
+
+    input, button {
+        display: block;
+        margin: 0.5rem 0;
+    }
+</style>
+</body>
+</html>
