@@ -1,32 +1,39 @@
 package com.sebastian_daschner.coffee;
 
 import javax.enterprise.context.ApplicationScoped;
-import java.util.ArrayList;
+import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
 @ApplicationScoped
+@Transactional
 public class CoffeeShop {
 
-    private Map<UUID, Coffee> store = new ConcurrentHashMap<>();
+    @Inject
+    CoffeeRepository repository;
 
     public String getCoffee() {
-        return "Coffee.";
+        return "Coffee?";
+    }
+
+    //    @Scheduled(every = "3s")
+    public void printCoffee() {
+        System.out.println(getCoffee());
     }
 
     public Coffee getCoffee(UUID id) {
-        return store.get(id);
+        return repository.findById(id);
     }
 
     public List<Coffee> getCoffees() {
-        return new ArrayList<>(store.values());
+//        return repository.listAll();
+        return repository.listAllEspressos();
     }
 
     public UUID addCoffee(String type) {
         Coffee coffee = new Coffee(type);
-        store.put(coffee.id, coffee);
+        repository.persist(coffee);
         return coffee.id;
     }
 

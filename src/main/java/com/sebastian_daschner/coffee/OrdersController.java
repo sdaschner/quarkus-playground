@@ -26,14 +26,7 @@ public class OrdersController {
     @GET
     public TemplateInstance orders() {
         List<Coffee> orders = coffeeShop.getCoffees();
-        return template.data("orders", orders);
-    }
-
-    @POST
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response create(@FormParam("type") String type) {
-        coffeeShop.addCoffee(type);
-        return Response.seeOther(URI.create("/orders.html")).build();
+        return template.data("coffees", orders);
     }
 
 }
