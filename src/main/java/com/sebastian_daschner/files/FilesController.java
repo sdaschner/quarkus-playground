@@ -3,16 +3,12 @@ package com.sebastian_daschner.files;
 import io.quarkus.qute.Location;
 import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateInstance;
-import org.jboss.resteasy.reactive.MultipartForm;
-import org.jboss.resteasy.reactive.multipart.FileUpload;
+import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.util.List;
 
 @ApplicationScoped
 @Produces(MediaType.TEXT_HTML)
@@ -83,11 +79,11 @@ public class FilesController {
 
         System.out.println(">>>");
         System.out.println("input.text = " + input.text);
-        for (FileUpload upload : input.file) {
-            System.out.println("input.file = " + upload.uploadedFile());
-            System.out.println("input.fileName = " + upload.fileName());
-            System.out.println("content = " + Files.readString(upload.uploadedFile()));
-        }
+//        for (FileUpload upload : input.file) {
+//            System.out.println("input.file = " + upload.uploadedFile());
+//            System.out.println("input.fileName = " + upload.fileName());
+//            System.out.println("content = " + Files.readString(upload.uploadedFile()));
+//        }
         System.out.println("<<<");
 
         return template.instance();
@@ -98,8 +94,8 @@ public class FilesController {
         @FormParam("text")
         public String text;
 
-        @FormParam("file")
-        public List<FileUpload> file;
+//        @FormParam("file")
+//        public List<FileUpload> file;
 
     }
 
