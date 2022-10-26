@@ -1,13 +1,11 @@
 package com.sebastian_daschner.coffee;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.PrePersist;
+import javax.persistence.*;
 import java.time.Instant;
 import java.util.UUID;
 
 @Entity
+@Table(name = "coffee_orders")
 public class Coffee {
 
     @Id

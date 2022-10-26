@@ -3,7 +3,9 @@ package com.sebastian_daschner.coffee;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.json.Json;
+import javax.json.JsonArray;
 import javax.json.JsonObject;
+import javax.json.stream.JsonCollectors;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -12,6 +14,7 @@ import javax.ws.rs.core.UriInfo;
 import java.net.URI;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Path("coffees")
 @ApplicationScoped
@@ -25,8 +28,17 @@ public class CoffeesResource {
     UriInfo uriInfo;
 
     @GET
-    public List<Coffee> getCoffees() {
-        return coffeeShop.getCoffees();
+    public JsonArray getCoffees() {
+        return coffeeShop.getCoffees().stream()
+                .map(c -> Json.createObjectBuilder()
+                        .add("type", c.type)
+                        .add("_self", uriInfo.getBaseUriBuilder()
+                                .path(CoffeesResource.class)
+                                .path(CoffeesResource.class, "getCoffee")
+                                .build(c.id).toString())
+                        .build())
+                .collect(JsonCollectors.toJsonArray());
+//        return coffeeShop.getCoffees();
     }
 
     @GET

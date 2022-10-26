@@ -17,11 +17,6 @@ public class CoffeeShop {
         return "Coffee?";
     }
 
-    //    @Scheduled(every = "3s")
-    public void printCoffee() {
-        System.out.println(getCoffee());
-    }
-
     public Coffee getCoffee(UUID id) {
         return repository.findById(id);
     }
