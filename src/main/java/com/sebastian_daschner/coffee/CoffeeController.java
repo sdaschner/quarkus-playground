@@ -6,16 +6,16 @@ import io.quarkus.qute.TemplateInstance;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.ws.rs.*;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.net.URI;
 import java.util.List;
 
-@Path("orders.html")
+@Path("index.html")
 @ApplicationScoped
 @Produces(MediaType.TEXT_HTML)
-public class OrdersController {
+public class CoffeeController {
 
     @Inject
     CoffeeShop coffeeShop;
@@ -24,9 +24,9 @@ public class OrdersController {
     Template template;
 
     @GET
-    public TemplateInstance orders() {
-        List<Coffee> orders = coffeeShop.getCoffees();
-        return template.data("coffees", orders);
+    public TemplateInstance index() {
+        List<Coffee> coffees = coffeeShop.getCoffees();
+        return template.data("coffees", coffees);
     }
 
 }

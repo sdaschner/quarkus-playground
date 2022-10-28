@@ -12,9 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Path("coffees")
 @ApplicationScoped
@@ -38,7 +36,6 @@ public class CoffeesResource {
                                 .build(c.id).toString())
                         .build())
                 .collect(JsonCollectors.toJsonArray());
-//        return coffeeShop.getCoffees();
     }
 
     @GET
