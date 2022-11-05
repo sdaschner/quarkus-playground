@@ -10,7 +10,7 @@ class CoffeeShopTest {
 
     @Test
     void testCoffee() {
-        assertThat(coffeeShop.getCoffee()).isEqualTo("Coffee.");
+        assertThat(coffeeShop.getCoffee()).isEqualTo("Coffee");
     }
 
 }

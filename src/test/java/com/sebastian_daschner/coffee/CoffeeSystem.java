@@ -20,7 +20,7 @@ public class CoffeeSystem {
     private URI buildUri() {
         String host = System.getProperty("coffee.test.host", "localhost");
         String port = System.getProperty("coffee.test.port", "8080");
-        return UriBuilder.fromUri("http://{host}:{port}/coffee/").build(host, port);
+        return UriBuilder.fromUri("http://{host}:{port}/").build(host, port);
     }
 
     public String getCoffee() {
