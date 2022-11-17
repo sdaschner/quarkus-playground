@@ -1,4 +1,4 @@
-package com.sebastian_daschner.coffee;
+package com.sebastian_daschner.ai;
 
 import io.quarkus.qute.Location;
 import io.quarkus.qute.Template;
@@ -10,23 +10,22 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import java.util.List;
 
-@Path("index.html")
 @ApplicationScoped
+@Path("image.html")
 @Produces(MediaType.TEXT_HTML)
-public class CoffeeController {
+public class ImageGenerationController {
 
-    @Inject
-    CoffeeShop coffeeShop;
-
-    @Location("orders.html")
+    @Location("image.html")
     Template template;
 
+    @Inject
+    OpenAIClient openAIClient;
+
     @GET
-    public TemplateInstance index() {
-        List<Coffee> coffees = coffeeShop.getCoffees();
-        return template.data("coffees", coffees);
+    public TemplateInstance image() {
+        String url = openAIClient.generateImage("photo of a smiling corgi");
+        return template.data("url", url);
     }
 
 }
