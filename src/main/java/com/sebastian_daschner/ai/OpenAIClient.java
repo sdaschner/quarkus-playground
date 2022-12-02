@@ -53,7 +53,7 @@ public class OpenAIClient {
 
     public String generateText(String prompt) {
         JsonObject json = Json.createObjectBuilder()
-                .add("model", "text-davinci-002")
+                .add("model", "text-davinci-003")
                 .add("prompt", prompt)
                 .add("max_tokens", 64)
                 .build();
