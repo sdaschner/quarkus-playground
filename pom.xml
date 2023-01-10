@@ -106,7 +106,7 @@
     </build>
 
     <properties>
-        <quarkus.version>2.0.0.CR3</quarkus.version>
+        <quarkus.version>2.15.2.Final</quarkus.version>
         <maven.compiler.source>16</maven.compiler.source>
         <maven.compiler.target>16</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
