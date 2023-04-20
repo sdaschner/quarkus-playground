@@ -14,7 +14,7 @@ public class CoffeeShop {
     CoffeeRepository repository;
 
     public String getCoffee() {
-        return "Coffee?";
+        return "Coffee";
     }
 
     public Coffee getCoffee(UUID id) {

@@ -12,7 +12,7 @@ public class CoffeeIT {
 
     @Test
     void testHello() {
-        assertThat(coffeeSystem.getCoffee()).isEqualTo("Coffee?");
+        assertThat(coffeeSystem.getCoffee()).isEqualTo("Coffee");
     }
 
     @Test
