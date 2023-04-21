@@ -13,7 +13,6 @@ public class Coffee {
     @Id
     @GeneratedValue
     public UUID id;
-
     public String type;
 
     public Coffee() {

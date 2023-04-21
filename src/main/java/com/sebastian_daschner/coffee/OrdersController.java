@@ -12,21 +12,21 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Path("index.html")
+@Path("orders.html")
 @ApplicationScoped
 @Produces(MediaType.TEXT_HTML)
-public class CoffeeController {
-
-    @Inject
-    CoffeeShop coffeeShop;
+public class OrdersController {
 
     @Location("orders.html")
     Template template;
 
+    @Inject
+    CoffeeShop coffeeShop;
+
     @GET
-    public TemplateInstance index() {
-        List<Coffee> coffees = coffeeShop.getCoffees();
-        return template.data("coffees", coffees);
+    public TemplateInstance orders() {
+        List<Coffee> orders = coffeeShop.getCoffees();
+        return template.data("orders", orders);
     }
 
 }

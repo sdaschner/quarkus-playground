@@ -22,8 +22,8 @@ public class CoffeeShop {
     }
 
     public List<Coffee> getCoffees() {
-//        return repository.listAllEspressos();
         return repository.listAll();
+//        return repository.listAllEspressos();
     }
 
     public UUID addCoffee(String type) {

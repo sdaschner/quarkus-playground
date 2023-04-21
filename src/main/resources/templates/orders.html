@@ -5,17 +5,14 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Coffees</title>
+    <title>Coffee Orders</title>
 </head>
 <body>
-
-<h2>Coffees</h2>
-
+<h1>Welcome!</h1>
 <ul>
-    {#for coffee in coffees}
-        <li>{coffee_count}. {coffee.type}{#if coffee_hasNext},{/if}</li>
-    {/for}
+{#for order in orders}
+    <li>{order_count}. {order.id}: {order.type}{#if order_hasNext},{/if}</li>
+{/for}
 </ul>
-
 </body>
 </html>
