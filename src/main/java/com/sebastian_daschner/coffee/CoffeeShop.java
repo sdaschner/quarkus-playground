@@ -1,34 +1,34 @@
 package com.sebastian_daschner.coffee;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 @ApplicationScoped
-@Transactional
 public class CoffeeShop {
 
-    @Inject
-    CoffeeRepository repository;
+    private final Map<UUID, Coffee> coffees = new ConcurrentHashMap<>();
 
     public String getCoffee() {
         return "Coffee";
     }
 
     public Coffee getCoffee(UUID id) {
-        return repository.findById(id);
+        return coffees.get(id);
     }
 
     public List<Coffee> getCoffees() {
-        return repository.listAll();
-//        return repository.listAllEspressos();
+        return new ArrayList<>(coffees.values());
     }
 
     public UUID addCoffee(String type) {
         Coffee coffee = new Coffee(type);
-        repository.persist(coffee);
+        coffee.id = UUID.randomUUID();
+        coffees.put(coffee.id, coffee);
         return coffee.id;
     }
 
