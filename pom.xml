@@ -93,7 +93,7 @@
     </build>
 
     <properties>
-        <quarkus.version>3.0.2.Final</quarkus.version>
+        <quarkus.version>3.1.0.Final</quarkus.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
