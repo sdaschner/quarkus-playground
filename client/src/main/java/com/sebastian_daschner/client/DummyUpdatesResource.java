@@ -14,7 +14,7 @@ import jakarta.ws.rs.sse.SseEventSink;
 @Path("updates")
 @Produces(MediaType.SERVER_SENT_EVENTS)
 //
-// this class is required due to https://github.com/quarkusio/quarkus/issues/35967
+// this class is required due to https://github.com/quarkusio/quarkus/issues/35967 (only when quarkus-rest-client-jsonb is used, not for -reactive)
 // if this class gets removed, the SSE client connection stops working
 public class DummyUpdatesResource {
 

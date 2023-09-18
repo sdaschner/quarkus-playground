@@ -34,8 +34,8 @@ public class SseClient {
         WebTarget target = client.target("http://localhost:8080/updates");
         updateSource = SseEventSource.target(target).build();
         updateSource.register(ev -> {
-            System.out.println(ev.getName());
-            System.out.println(ev.readData());
+            System.out.println("ev.isEmpty() = " + ev.isEmpty());
+            System.out.println("event: " + ev.getName() + " " + ev.readData());
         }, thr -> {
             System.err.println("Error in SSE updates");
             thr.printStackTrace();
@@ -44,7 +44,7 @@ public class SseClient {
         System.out.println("SSE opened");
         updateSource.open();
 
-        LockSupport.parkNanos(5_000_000_000L);
+        LockSupport.parkNanos(7_000_000_000L);
     }
 
 }

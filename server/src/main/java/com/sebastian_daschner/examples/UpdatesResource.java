@@ -22,17 +22,19 @@ public class UpdatesResource {
 
     @GET
     public void updates(@Context SseEventSink eventSink) {
-        eventSink.send(createEvent());
+        eventSink.send(createEvent("test234", "test"));
         LockSupport.parkNanos(1_000_000_000L);
-        eventSink.send(createEvent());
+        eventSink.send(createEvent("test123", ""));
         LockSupport.parkNanos(1_000_000_000L);
-        eventSink.send(createEvent());
+        eventSink.send(createEvent("test234", "test"));
+        LockSupport.parkNanos(1_000_000_000L);
+        eventSink.send(createEvent("test123", ""));
     }
 
-    private OutboundSseEvent createEvent() {
+    private OutboundSseEvent createEvent(String name, String data) {
         return sse.newEventBuilder()
-                .name("test")
-                .data("test")
+                .name(name)
+                .data(data)
                 .build();
     }
 
