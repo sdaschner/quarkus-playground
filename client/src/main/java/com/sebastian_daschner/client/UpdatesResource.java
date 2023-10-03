@@ -10,26 +10,34 @@ import jakarta.ws.rs.sse.OutboundSseEvent;
 import jakarta.ws.rs.sse.Sse;
 import jakarta.ws.rs.sse.SseEventSink;
 
+import java.util.concurrent.locks.LockSupport;
+
 @ApplicationScoped
 @Path("updates")
 @Produces(MediaType.SERVER_SENT_EVENTS)
 //
 // this class is required due to https://github.com/quarkusio/quarkus/issues/35967 (only when quarkus-rest-client-jsonb is used, not for -reactive)
 // if this class gets removed, the SSE client connection stops working
-public class DummyUpdatesResource {
+public class UpdatesResource {
 
     @Context
     Sse sse;
 
     @GET
     public void updates(@Context SseEventSink eventSink) {
-        eventSink.send(createEvent());
+        eventSink.send(createEvent("test234", "test"));
+        LockSupport.parkNanos(1_000_000_000L);
+        eventSink.send(createEvent("test123", ""));
+        LockSupport.parkNanos(1_000_000_000L);
+        eventSink.send(createEvent("test234", "test"));
+        LockSupport.parkNanos(1_000_000_000L);
+        eventSink.send(createEvent("test123", ""));
     }
 
-    private OutboundSseEvent createEvent() {
+    private OutboundSseEvent createEvent(String name, String data) {
         return sse.newEventBuilder()
-                .name("test")
-                .data("test")
+                .name(name)
+                .data(data)
                 .build();
     }
 
