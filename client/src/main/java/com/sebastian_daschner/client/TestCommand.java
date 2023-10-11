@@ -17,11 +17,11 @@ public class TestCommand implements Runnable {
     @CommandLine.Option(names = "--client")
     boolean isClient;
 
-    // run with java -Dquarkus.http.host-enabled=false -jar target/quarkus-app/quarkus-run.jar --client 
+    // run with java -jar target/quarkus-app/quarkus-run.jar --client OR
+    // target/client-runner --client
     @Override
     public void run() {
         if (isClient) {
-            quarkus.http.port=0
             System.out.println("running test run()");
             client.someMethod();
         } else {
