@@ -3,12 +3,14 @@ package com.sebastian_daschner.files;
 import io.quarkus.qute.Location;
 import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateInstance;
-import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
+import org.jboss.resteasy.reactive.multipart.FileUpload;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.util.List;
 
 @ApplicationScoped
 @Produces(MediaType.TEXT_HTML)
@@ -25,65 +27,37 @@ public class FilesController {
 
 //    @POST
 //    @Consumes(MediaType.MULTIPART_FORM_DATA)
-//    public TemplateInstance upload(Map<String, InputStream> parts) throws IOException {
+//    public TemplateInstance upload(@MultipartForm MultipartFormDataInput input) throws IOException {
 //
 //        System.out.println(">>>");
-//        for (Map.Entry<String, InputStream> entry : parts.entrySet()) {
-//            System.out.println(entry.getKey() + ": " + new String(entry.getValue().readAllBytes()));
-//        }
-//        System.out.println("<<<");
 //
-//        return template.instance();
-//    }
-
-//    @POST
-//    @Consumes(MediaType.MULTIPART_FORM_DATA)
-//    public TemplateInstance upload(@MultipartForm MultipartInput input) throws IOException {
+//        System.out.println("text = " + input.getFormDataPart("text", new GenericType<String>() {}));
 //
-//        System.out.println(">>>");
 //        for (InputPart part : input.getParts()) {
-//            System.out.println("part.getHeaders() = " + part.getHeaders().getFirst("Content-Disposition"));
-//            System.out.println("part.getBodyAsString() = " + part.getBodyAsString());
+//            System.out.println("part.getHeaders() = " + part.getHeaders());
+//            System.out.println("part.getFileName() = " + part.getFileName());
+//            System.out.println("part.getBody() = " + new String(part.getBody().readAllBytes()));
+//            System.out.println("---");
 //        }
 //        System.out.println("<<<");
 //
 //        return template.instance();
-//    }
-
-//    @POST
-//    @Consumes(MediaType.MULTIPART_FORM_DATA)
-//    public TemplateInstance upload(@MultipartForm FileUploadInput input) throws IOException {
-//
-//        System.out.println(">>>");
-//        System.out.println("input.text = " + input.text);
-//        System.out.println("input.file = " + input.file.getAbsolutePath());
-//        System.out.println("content = " + Files.readString(input.file.toPath()));
-//        System.out.println("<<<");
-//
-//        return template.instance();
-//    }
-//
-//    public static class FileUploadInput {
-//
-//        @FormParam("text")
-//        public String text;
-//
-//        @FormParam("file")
-//        public File file;
-//
 //    }
 
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public TemplateInstance upload(@MultipartForm FileUploadInput input) throws IOException {
+    public TemplateInstance upload(FileUploadInput input) throws IOException {
 
         System.out.println(">>>");
+
         System.out.println("input.text = " + input.text);
-//        for (FileUpload upload : input.file) {
-//            System.out.println("input.file = " + upload.uploadedFile());
-//            System.out.println("input.fileName = " + upload.fileName());
-//            System.out.println("content = " + Files.readString(upload.uploadedFile()));
-//        }
+
+        for (FileUpload file : input.file) {
+            System.out.println("input.file = " + file.uploadedFile());
+            System.out.println("input.filename = " + file.fileName());
+            System.out.println("input.file.content = " + Files.readString(file.uploadedFile()));
+        }
+
         System.out.println("<<<");
 
         return template.instance();
@@ -94,8 +68,8 @@ public class FilesController {
         @FormParam("text")
         public String text;
 
-//        @FormParam("file")
-//        public List<FileUpload> file;
+        @FormParam("file")
+        public List<FileUpload> file;
 
     }
 
