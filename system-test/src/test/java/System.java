@@ -5,24 +5,30 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import java.net.URI;
 
-public class CoffeeSystem {
+public class System {
 
     private final Client client;
     private final WebTarget baseTarget;
 
-    public CoffeeSystem() {
+    public System() {
         client = ClientBuilder.newBuilder().build();
         baseTarget = client.target(buildUri());
     }
 
     private URI buildUri() {
-        String host = System.getProperty("coffee.test.host", "localhost");
-        String port = System.getProperty("coffee.test.port", "8080");
-        return UriBuilder.fromUri("http://{host}:{port}/coffee/").build(host, port);
+        String host = java.lang.System.getProperty("application.test.host", "localhost");
+        String port = java.lang.System.getProperty("application.test.port", "8080");
+        return UriBuilder.fromUri("http://{host}:{port}/hello").build(host, port);
     }
 
-    public String getCoffee() {
+    public String sayHello() {
         Response response = baseTarget.request().get();
+        verifySuccess(response);
+        return response.readEntity(String.class);
+    }
+
+    public String sayHello(String name) {
+        Response response = baseTarget.path(name).request().get();
         verifySuccess(response);
         return response.readEntity(String.class);
     }
